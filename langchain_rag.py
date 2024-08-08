@@ -11,7 +11,11 @@ import base64
 def get_chunks(pdf_path, max_characters):
     
     pdf_text = extract_text(pdf_path)
-    nlp = spacy.load("spacy_models/en_core_web_sm")
+    # Determine the path to the SpaCy model
+    spacy_model_path = os.path.join(os.path.dirname(__file__), "spacy_models", "en_core_web_sm")
+    
+    # Load the SpaCy model from the local path
+    nlp = spacy.load(spacy_model_path)
     
     doc = nlp(pdf_text)
     sentences =  [sent.text.strip() for sent in doc.sents]
