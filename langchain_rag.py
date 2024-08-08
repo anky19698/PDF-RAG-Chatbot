@@ -189,7 +189,7 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Generating response..."):
                     # Perform a similarity search to find relevant chunks of text
-                    results = vector_store.similarity_search_with_scores(query=query, k=3)
+                    results = vector_store.similarity_search_with_score(query=query, k=3)
                     # Extract the content of the most relevant chunk
                     corpus = results[0][0].page_content
 
