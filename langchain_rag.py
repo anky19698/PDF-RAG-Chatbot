@@ -6,18 +6,12 @@ from pdfminer.high_level import extract_text
 from langchain_core.documents import Document
 import streamlit as st
 import base64
-from spacy.cli.download import download
 
 
 def get_chunks(pdf_path, max_characters):
     
     pdf_text = extract_text(pdf_path)
-    try:
-        nlp = spacy.load("en_core_web_sm")
-    except IOError:
-        # If the model is not installed, download and install it
-        download("en_core_web_sm")
-        nlp = spacy.load("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
     
     doc = nlp(pdf_text)
     sentences =  [sent.text.strip() for sent in doc.sents]
