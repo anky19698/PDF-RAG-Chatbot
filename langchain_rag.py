@@ -11,7 +11,13 @@ import base64
 def get_chunks(pdf_path, max_characters):
     
     pdf_text = extract_text(pdf_path)
-    nlp = spacy.load("en_core_web_sm")
+    try:
+        nlp = spacy.load("en_core_web_sm")
+    except IOError:
+        # If the model is not installed, download and install it
+        download("en_core_web_sm")
+        nlp = spacy.load("en_core_web_sm")
+    
     doc = nlp(pdf_text)
     sentences =  [sent.text.strip() for sent in doc.sents]
     combined_chunks = []
