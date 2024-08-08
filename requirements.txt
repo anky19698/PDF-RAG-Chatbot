@@ -6,3 +6,5 @@ streamlit
 langchain-community
 chromadb
 pysqlite3-binary
+opentelemetry-sdk
+opentelemetry-exporter-otlp
