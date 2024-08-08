@@ -51,7 +51,7 @@ def create_chromadb(_documents):
 @st.cache_resource
 def get_llm_model():
     # Set up Hugging Face Token
-    hf_token = "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"
+    hf_token = st.secrets['hf_token']
     os.environ['HUGGINGFACEHUB_API_TOKEN'] = hf_token
 
     # Set up the LLM model
