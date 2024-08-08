@@ -139,11 +139,11 @@ def main():
     # Check if a PDF file has been uploaded
     if uploaded_file is not None:
 
-        # Display PDF
-        pdf_contents = uploaded_file.read()
-        user_pdf_base64 = base64.b64encode(pdf_contents).decode('utf-8')
-        st.write(f'<iframe src="data:application/pdf;base64,{user_pdf_base64}" width="700" height="500" style="border: none;"></iframe>', unsafe_allow_html=True)
-        st.write("")
+        # # Display PDF
+        # pdf_contents = uploaded_file.read()
+        # user_pdf_base64 = base64.b64encode(pdf_contents).decode('utf-8')
+        # st.write(f'<iframe src="data:application/pdf;base64,{user_pdf_base64}" width="700" height="500" style="border: none;"></iframe>', unsafe_allow_html=True)
+        # st.write("")
         
         # Extract chunks of text from the uploaded PDF
         chunks = get_chunks(uploaded_file, 1000)
