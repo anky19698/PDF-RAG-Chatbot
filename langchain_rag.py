@@ -2,7 +2,7 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 import os
 from langchain_huggingface import HuggingFaceEmbeddings, HuggingFaceEndpoint
 import spacy
@@ -52,10 +52,9 @@ def get_chunks(pdf_path, max_characters):
     return combined_chunks
 
 @st.cache_resource
-def create_chromadb(_documents):
-    embedding_model = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-    vector_store = Chroma(embedding_function=embedding_model)
-    vector_store.add_documents(documents=_documents)
+def create_faiss_db(_documents):
+    embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
+    vector_store = FAISS.from_documents(documents=_documents, embedding=embeddings)
     return vector_store
 
 @st.cache_resource
@@ -157,7 +156,7 @@ def main():
         model = get_llm_model()
         
         # Create or load a vector store to handle document embeddings
-        vector_store = create_chromadb(chunks)
+        vector_store = create_faiss_db(chunks)
         
         # Define sample Q&A pairs for testing purposes
         samples = get_samples()
@@ -194,7 +193,7 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Generating response..."):
                     # Perform a similarity search to find relevant chunks of text
-                    results = vector_store.similarity_search_with_relevance_scores(query=query, k=3)
+                    results = vector_store.similarity_search_with_scores(query=query, k=3)
                     # Extract the content of the most relevant chunk
                     corpus = results[0][0].page_content
 
