@@ -128,9 +128,6 @@ def main():
         
         # Create or load a vector store to handle document embeddings
         vector_store = create_faiss_db(chunks)
-        
-        # Define sample Q&A pairs for testing purposes
-        samples = get_samples()
 
         # Initialize chat history in the session state if it doesn't exist
         if 'chat_history' not in st.session_state:
