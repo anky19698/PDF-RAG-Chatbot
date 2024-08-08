@@ -4,6 +4,4 @@ spacy
 pdfminer.six
 streamlit
 langchain-community
-chromadb== 0.5.3
-pysqlite3-binary
-protobuf==3.20.*
+faiss
