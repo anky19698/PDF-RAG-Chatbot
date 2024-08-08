@@ -74,7 +74,7 @@ def get_llm_model():
 
     return hf_endpoint
 
-def generate_response(query, context, model, chat_history, samples):
+def generate_response(query, context, model, chat_history):
     try:
         recent_history = chat_history[-5:]
         history_text = "\n".join([f"{msg['role'].capitalize()}: {msg['content']}" for msg in recent_history])
@@ -103,31 +103,6 @@ def generate_response(query, context, model, chat_history, samples):
     response = model.invoke(input_prompt)
     return response.strip()
     
-def get_samples():
-    samples = [
-    {
-        "question": "What white wines do you have?",
-        "answer": "We offer the following wines: The Jessup Cellars 2022 Chardonnay and the 2023  Sauvignon Blanc"
-    },
-    {
-        "question": "What red wines is Jessup Cellars offering in 2024?",
-        "answer": "Jessup Cellars offers a number of red wines across a range of varietals, from Pinot Noir and Merlot blends from the Truchard Vineyard, to blended Cabernet Sauvignon from both the Napa and Alexander Valleys, our Mendocino Rougette combining Grenache and Carignane varietals which we refer to as our 'Summer Red', to the ultimate expression of the 'Art of the Blend\" with our Juel and Table for Four Red Wines. We also offer 100% Zinfandel from 134 year old vines in the Mendocino region and our own 100% Petite Sirah grown in the Wooden Valley in Southeastern Napa County. We also offer some seasonal favorites, led by the popular whimsical Manny's Blend which should be released later in 2024 with a very special label."
-    },
-    {
-        "question": "Please tell me more about your consulting winemaker Rob Lloyd?",
-        "answer": "Rob Lloyd \nConsulting Winemaker\n\nBIOGRAPHY\nHometown: All of California\n\nFavorite Jessup Wine Pairing: Carneros Chardonnay with freshly caught Mahi-Mahi\n\nAbout: Rob\u2019s foray into wine started directly after graduating college when he came to Napa to work in a tasting room for the summer \u2013 before getting a \u2018real job\u2019. He became fascinated with wine and the science of winemaking and began to learn everything he could about the process.\n\nWhile interviewing for that \u201creal job\u201d, the interviewer asked him what he had been doing with his time since graduation. After speaking passionately and at length about wine, the interviewer said, \u201cYou seem to love that so much. Why do you want this job?\u201d Rob realized he didn't want it, actually. He thanked the man, and thus began a career in the wine industry.\n\nRob has since earned his MS in Viticulture & Enology from the University of California Davis and worked for many prestigious wineries including Cakebread, Stag\u2019s Leap Wine Cellars, and La Crema. Rob began crafting Jessup Cellars in the 2009 season and took the position of Director of Winemaking at Jessup Cellars in 2010. He now heads up our winemaking for the Good Life Wine Collective, which also includes Handwritten Wines."
-    },
-    {
-        "question": "Tell me an interesting fact about Rob Llyod",
-        "answer": "While interviewing for that \u201creal job\u201d, the interviewer asked him what he had been doing with his time since graduation. After speaking passionately and at length about wine, the interviewer said, \u201cYou seem to love that so much. Why do you want this job?\u201d Rob realized he didn't want it, actually. He thanked the man, and thus began a career in the wine industry."
-    },
-    {
-        "question": "Are walk ins allowed?",
-        "answer": " Walk-ins are welcome anytime for our Light Flight experience. Our most popular tastinig experience is the jessup Classic Tasting, which includes a flight of 5 wines perfectly paired with cheeses, accompanied by palate cleansing Marcona almonds and a chocolate surprise. The Classic Tasting is $60 perperson, but is waived with a purchase of two or more bottles of wine per person."
-    }
-    ]
-
-    return samples
 
 def main():
     # Title of the Streamlit app
@@ -194,7 +169,7 @@ def main():
                     corpus = results[0][0].page_content
 
                     # Generate a response using the language model
-                    response = generate_response(query=query, context=corpus, model=model, chat_history=st.session_state.chat_history, samples=samples)
+                    response = generate_response(query=query, context=corpus, model=model, chat_history=st.session_state.chat_history)
                     # Display the generated response
                     st.write(response)    
 
