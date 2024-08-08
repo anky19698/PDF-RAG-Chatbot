@@ -6,6 +6,7 @@ from pdfminer.high_level import extract_text
 from langchain_core.documents import Document
 import streamlit as st
 import base64
+from spacy.cli.download import download
 
 
 def get_chunks(pdf_path, max_characters):
