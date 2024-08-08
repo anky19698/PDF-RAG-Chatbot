@@ -3,3 +3,4 @@ langchain-huggingface
 spacy
 pdfminer.six
 streamlit
+langchain-community
