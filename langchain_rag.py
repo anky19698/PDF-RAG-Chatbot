@@ -12,7 +12,8 @@ def get_chunks(pdf_path, max_characters):
     
     pdf_text = extract_text(pdf_path)
     # Determine the path to the SpaCy model
-    spacy_model_path = "./spacy_models/en_core_web_sm"
+    spacy_model_path = "./spacy_models/en_core_web_sm/en_core_web_sm-3.7.1"
+    # spacy_model_path = "./spacy_models/en_core_web_sm/en_core_web_sm-3.7.1"
     
     # Load the SpaCy model from the local path
     nlp = spacy.load(spacy_model_path)
