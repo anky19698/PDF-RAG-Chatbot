@@ -4,4 +4,4 @@ spacy
 pdfminer.six
 streamlit
 langchain-community
-faiss
+faiss-cpu
