@@ -24,8 +24,8 @@ This project implements a Retrieval-Augmented Generation (RAG) chatbot that answ
 ## Installation
 
 1. Clone this repository:
-  `git clone https://github.com/yourusername/pdf-rag-chatbot.git
-  cd pdf-rag-chatbot`
+  `git clone https://github.com/yourusername/pdf-rag-chatbot.git`
+  `cd pdf-rag-chatbot`
 2. Install the required packages:
    `pip install -r requirements.txt`
 3. Download the SpaCy model:
